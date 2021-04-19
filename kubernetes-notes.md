@@ -22,15 +22,15 @@ This contains all self-mastery notes on Kubernetes, starting from basics, securi
 ### Kubernetes Architecture Basics ###
 ![Kubernetes Architecture](./img/kubernetes-architecture-overview.png)  
 
-1. Central manager is called the `master` and it controls the `kube-apiserver`, `kube-scheduler`, various controllers and `etcd` storage system (cluster state, container settings and networking config). For now, only Linux nodes can be master on a cluster.
+1. Central manager is called the `master node` and it controls the `kube-apiserver`, `kube-scheduler`, various controllers and `etcd` storage system (cluster state, container settings and networking config). For now, only Linux nodes can be master on a cluster.
 
-1. `kube-apiserver` exposes API for others to speak to K8s. This is also what you communicate with using native K8s client `kubectl` or using curl commands.
+1. `kube-apiserver` exposes API for others to speak to K8s. This is also what you communicate with using native K8s client `kubectl` or using curl commands. Only the `kube-apiserver` interacts with the `etcd` storage system.
 
 1. `Kubeadm` is a tool built to provide **kubeadm init** and **kubeadm join** as best-practice "fast paths" for creating K8s clusters. `Kubeadm` performs the actions necessary to get a minimum viable cluster up and running.
 
 1. `kube-scheduler` takes requests for running containers (i.e. `kubectl` --> `kube-apiserver`) and finds a suitabl node to run that container.
 
-1. Every `node` running a container would have `kubelet` and `kube-proxy` processes.
+1. Every `worker node` running a container would have `kubelet` and `kube-proxy` processes. `Kubelet` is the main agent running on worker nodes.
 
 1. `kubelet` receives the request to run the containers, watches over them locally, manages the resources needed to keep the running. Interacts with the local container engine, Docker by default.
 
@@ -49,6 +49,8 @@ This contains all self-mastery notes on Kubernetes, starting from basics, securi
 1. The `Service` operator uses `labels` to request existing IP addresses and endpoints and manage the network connectivity between pods, namespaces and outside the cluster.
 
 1. `Jobs` and `CronJobs` are for recurring tasks on the cluster.
+
+More about Kubernetes architecture, linked [here](./kubernetes-architecture.md)
 
 ---
 
